@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inside.idmcs.api.qr.history.dao.QRHistoryDao">
+	
+	<select id="getCountHistoryQR" resultType="int" >	
+		SELECT 
+			count (*)
+		from qr_history h 
+		JOIN employee e on h.emp_id = e.emp_id
+		WHERE 
+			h.check_dt BETWEEN to_timestamp(#{reqVO.stDt}|| '000000', 'YYYYMMDDHH24MISS') 
+                         AND to_timestamp(#{reqVO.endDt} || '235959', 'YYYYMMDDHH24MISS')
+			<if test="reqVO.range == 'APP'">
+		        AND h.app_no = #{instAndAppInfo.appNo}
+		    </if>
+		    <if test='reqVO.status == "S"'><!--test="status == 'S'"이렇게 했을경우.. 따옴표위치다름 S를 숫자로 계속인식해서 안됐었음 .. char형으로 인식해서 그런다고함 -->
+		    	AND h.check_res = 'S'
+		    </if>
+		    <if test='reqVO.status == "F"'>
+		    	AND h.check_res= 'F'
+		    </if>
+		    AND e.emp_ci = #{reqVO.ci}
+		    
+	</select>
+	
+	<select id="selectQRHistoryList" resultType="QRCheckHistory">	
+		SELECT 
+			CASE 
+	            WHEN h.check_res = 'S' THEN '성공'
+	            ELSE '실패'
+	        END AS checkResult,
+			TO_CHAR(h.check_dt, 'YYYY/MM/DD HH24:MI:SS') AS checkDt,
+			h.qr_cd As qrCd
+		from qr_history h
+		JOIN employee e on h.emp_id = e.emp_id
+		WHERE 
+			h.check_dt BETWEEN to_timestamp(#{reqVO.stDt}|| '000000', 'YYYYMMDDHH24MISS') 
+                         AND to_timestamp(#{reqVO.endDt} || '235959', 'YYYYMMDDHH24MISS')	
+			<if test="reqVO.range == 'APP'">
+		        AND h.app_no = #{instAndAppInfo.appNo}
+		    </if>
+		    <if test='reqVO.status == "S"'><!--test="status == 'S'"이렇게 했을경우.. 따옴표위치다름 S를 숫자로 계속인식해서 안됐었음 .. char형으로 인식해서 그런다고--> 
+		    	AND h.check_res = 'S'
+		    </if>
+		    <if test='reqVO.status == "F"'>
+		    	AND h.check_res= 'F'
+		    </if>
+		    AND e.emp_ci = #{reqVO.ci}
+		ORDER BY h.check_dt ${reqVO.order}
+		LIMIT #{pageInfo.reqListCount} OFFSET #{pageInfo.offset}
+	</select>
+
+	<insert id="insertQRHistory" parameterType="QRHistory" useGeneratedKeys="true" keyProperty="qrHistNo">
+	    INSERT INTO qr_history(qr_cd, check_dt, app_no, inst_no)
+			VALUES (#{qrCd}, CURRENT_TIMESTAMP, #{appNo}, #{instNo});
+	</insert>
+		
+	<update id="updateQRHistorySuccess">
+		UPDATE qr_history
+			SET	emp_id = #{empId},
+				check_res = 'S',
+				check_dt = CURRENT_TIMESTAMP
+		WHERE qr_hist_no = #{qrHistNo}
+	</update>
+	
+	<update id="updateQRHistoryFail">
+		UPDATE qr_history
+			SET	emp_id = #{empId},
+				check_res = 'F',
+				check_dt = CURRENT_TIMESTAMP
+		WHERE qr_hist_no = #{qrHistNo}
+	</update>
+	
+</mapper>

@@ -1,0 +1,1550 @@
+{
+	"info": {
+		"_postman_id": "d67347bd-8b62-4738-a792-f8d331d54f55",
+		"name": "신분확인 시스템 테스트",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36586765"
+	},
+	"item": [
+		{
+			"name": "평문",
+			"item": [
+				{
+					"name": "정상 케이스",
+					"item": [
+						{
+							"name": "공개키 생성",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/enc/publicKey",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"enc",
+										"publicKey"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 등록",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"birthDay\": \"19990909\",\r\n    \"subCode\": \"1090909\",\r\n    \"userName\": \"김공구\",\r\n    \"issuedYmd\": \"20240101\",\r\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\",\r\n    \"ci\": \"9R2Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\r\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \r\n    \"mobileNo\": \"01009090909\",\r\n    \"deviceInfo\": \"9ELl946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\r\n    \"telecom\": \"S\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/regist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"regist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 조회",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"9R2Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \n    \"mobileNo\": \"01009090909\",\n    \"deviceInfo\": \"9ELl946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"S\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/info",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"info"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 생성",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"9R2Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \n    \"mobileNo\": \"01009090909\",\n    \"deviceInfo\": \"9ELl946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"S\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/request",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"request"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 조회",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"qrCd\": \"iVBORw0KGgoAAAANSUhEUgAAAJYAAACWAQAAAAAUekxPAAAA6klEQVR4Xu2UsQ7DMAhE2fzL3mDjlxkq0Tu3Sdp0K0xRkCOT5wHnDiL5Ew85k5tdjpnICPUYTBqYc9mIsZIGZoPLV9LEQjTWSRNLj9nGsELJPjQoMFrjjJNv/zKGDZv6SssM7wIE03nlOlv+gKVhb2DIoWnSrEODAgt+fcwportHFQYRnEOTkLWJoYS0MQhgyhI42jSoMHz+FGDsmg3MMdGC66LF5163wBjscKf5DYyjxxvDKdtqVJiva7O/TbODrR5y1jp0KTL0EBz6rlFhfNhIm6YlRg3Qke/RLrP1jw32EAenzk5xs4uzJzOVnx27KZocAAAAAElFTkSuQmCC\",\n    \"ci\": \"9R2Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/check",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"check"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 이력 조회(내림차순, app, 첫페이지)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"9R2Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\",\n    \"mobileNo\": \"01009090909\",\n    \"deviceInfo\": \"9ELl946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"S\",\n    \"stDt\": \"20241009\",\n    \"endDt\": \"20241030\",\n    \"curListIndex\": \"1\",\n    \"reqListCnt\": \"5\",\n    \"order\": \"DESC\",\n    \"status\": \"A\",\n    \"range\": \"APP\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/hist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"hist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 이력 조회(오름차순, app, 마지막페이지)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"9R2Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\",\n    \"mobileNo\": \"01009090909\",\n    \"deviceInfo\": \"9ELl946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"S\",\n    \"stDt\": \"20241009\",\n    \"endDt\": \"20241030\",\n    \"curListIndex\": \"13\",\n    \"reqListCnt\": \"5\",\n    \"order\": \"ASC\",\n    \"status\": \"A\",\n    \"range\": \"APP\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/hist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"hist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 이력 조회(내림차순, 실패, ALL, 10개씩)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"9R2Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\",\n    \"mobileNo\": \"01009090909\",\n    \"deviceInfo\": \"9ELl946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"S\",\n    \"stDt\": \"20241009\",\n    \"endDt\": \"20241030\",\n    \"curListIndex\": \"1\",\n    \"reqListCnt\": \"10\",\n    \"order\": \"DESC\",\n    \"status\": \"F\",\n    \"range\": \"ALL\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/hist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"hist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 해지",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"9R2Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/terminate",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"terminate"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "비정상 케이스",
+					"item": [
+						{
+							"name": "공개키 생성(허용되지않은 IP)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"abJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app4Payload.ABCDEF1234567890ABCDEF1234567890\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/enc/publicKey",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"enc",
+										"publicKey"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "공개키 생성(허용되지않은 연계기관)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"byJhbGciOiJIUzI1lvkdieo5cCI6IkpXVCJ9.agency2Payload.ABCDEF1234567890ABCDEF1234567890\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app6Payload.FEDCBA0987654321FEDCBA0987654321\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/enc/publicKey",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"enc",
+										"publicKey"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "공개키 생성(허용되지않은 앱)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app3Payload.1234567890ABCDEF1234567890ABCDEF\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/enc/publicKey",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"enc",
+										"publicKey"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 등록 (등록o ->재등록)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"birthDay\": \"20030303\",\r\n    \"subCode\": \"3030303\",\r\n    \"userName\": \"박공삼\",\r\n    \"issuedYmd\": \"20240303\",\r\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\",\r\n    \"ci\": \"303Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\r\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \r\n    \"mobileNo\": \"01003030303\",\r\n    \"deviceInfo\": \"3030946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\r\n    \"telecom\": \"L\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/regist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"regist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 등록 (전화번호 불일치)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"birthDay\": \"19990202\",\n    \"subCode\": \"2020202\",\n    \"userName\": \"이공이\",\n    \"issuedYmd\": \"20240202\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\",\n    \"ci\": \"202Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \n    \"mobileNo\": \"01002020204\",\n    \"deviceInfo\": \"2020946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"K\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/regist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"regist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 조회(해지 -> 조회)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"202Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \n    \"mobileNo\": \"01002020202\",\n    \"deviceInfo\": \"2020946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"K\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/info",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"info"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 조회(직원상태 휴직)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"303Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \n    \"mobileNo\": \"01003030303\",\n    \"deviceInfo\": \"3030946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"L\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/info",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"info"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 해지(등록x -> 해지)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"202Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/terminate",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"terminate"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 생성(해지 -> QR생성)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"202Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \n    \"mobileNo\": \"01002020202\",\n    \"deviceInfo\": \"2020946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"K\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/request",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"request"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 생성(단말정보 불일치)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"202Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \n    \"mobileNo\": \"01002020202\",\n    \"deviceInfo\": \"2020946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"S\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/request",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"request"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 조회(QR 유효기간 만료)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"qrCd\": \"iVBORw0KGgoAAAANSUhEUgAAAJYAAACWAQAAAAAUekxPAAAA8UlEQVR4Xu2VsQ7CMAxEveWXs8VbfjkDUngXoIXCVHuqiKLKvEq1dT4bm1/nZkfyZ5djblY6ZwUJrHOHfinIYF64o6wgjXnVM4tRdG1ZTNdrO+pylr161H/07QxbB/SMwsyt8f0yR9s1CLGm/iBre8sRYDJ3RQbeicaZt1HxZPe6z0yA+XIPdctLCQwRBikGym4eijAKXhYni2QNsw41+s6mqJsuATYfA/20eAKbsvh8LJ0Epm8PZCXLVnOE9akdS9WKMphGr49CLhZPDmNaGGnba44yBCX4zHGWcRHB2lSL4kw9Yo9hTP1Rxdnh/NnF2R2/EpWBPXsK6gAAAABJRU5ErkJggg==\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/check",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"check"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 이력 조회(해지 -> 조회)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"202Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\",\n    \"mobileNo\": \"01002020202\",\n    \"deviceInfo\": \"2020946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"S\",\n    \"stDt\": \"20241009\",\n    \"endDt\": \"20241030\",\n    \"curListIndex\": \"1\",\n    \"reqListCnt\": \"10\",\n    \"order\": \"DESC\",\n    \"status\": \"F\",\n    \"range\": \"ALL\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/hist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"hist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 이력 조회(검증상태)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"ci\": \"9R2Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\",\n    \"mobileNo\": \"01009090909\",\n    \"deviceInfo\": \"9ELl946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"S\",\n    \"stDt\": \"20241009\",\n    \"endDt\": \"20241030\",\n    \"curListIndex\": \"1\",\n    \"reqListCnt\": \"5\",\n    \"order\": \"DESC\",\n    \"status\": \"Q\",\n    \"range\": \"APP\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/hist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"hist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 등록 데이터",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"birthDay\": \"19990909\",\r\n    \"subCode\": \"10909s9\",\r\n    \"userName\": \"김공구\",\r\n    \"issuedYmd\": \"20240101\",\r\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\",\r\n    \"ci\": \"9R2Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\r\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \r\n    \"mobileNo\": \"01009090909\",\r\n    \"deviceInfo\": \"9ELl946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\r\n    \"telecom\": \"S\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/regist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"regist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "암호문",
+			"item": [
+				{
+					"name": "정상 케이스",
+					"item": [
+						{
+							"name": "신분 등록",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"birthDay\": \"6ih/g4wg64qMa6Gw8bZARQ==\",\r\n    \"subCode\": \"fOIUScQgfZ6yc38wsJJkTw==\",\r\n    \"userName\": \"NQFZGSUkhdQqDSwMs8UIBw==\",\r\n    \"issuedYmd\": \"oupCMSH7re/rhSkoxpqYFQ==\",\r\n    \"encKey\": \"bNUL3sF0zGtG41FJ13We+av0qzQaTUz5+tGwAZg708crUq5KIHdD8NYVEI50wGdUcLeCyBvJpugqYvjtR2jjfggtoPrPPZSrxrw7NYIzG4crFC2+AArGvTMccKKok1q2CzsyY2FIHxgs+yEbdBKV7RT98PZsuWQdpgUjVbBAuu13U+rPm02G22iLpA8zqoKloY7/slDgLldLXruwJCDmyNoisOUMyZonazTSgaui+9Lo7yHGxfVttzyOCPcmQav5lUyFlIPOT8gteivSSCjqBFHGs6/eZcinM40N4Zl5AKZNVYJdoA5VZPnlHF85aVKhzLDChd3dbJmbGObXmDokcw==\",\r\n    \"ci\": \"02Ziy4xp21Hvnc9ICMUk7nVSZzQWPhgs7pbP7087TRpaGHeHnTsOeyt7GZKpUrXUEC1wt9Ins8XkJ2/lZE7AgxjM7GuRMmmNvvaCElX4x6O/dGezxxrGpJKg3r3le/kU\",\r\n    \"appKey\": \"lIqTXYfCEekh8h7qJrPHOF9YlOBm3cqbOojf26ix7tebk8AgbdK1/qIkoPHAnYy+\", \r\n    \"mobileNo\": \"1HC5y1iBkpeUKNB053/HCQ==\",\r\n    \"deviceInfo\": \"2JEyaVrhjC+69oQvPdnAAoE48MiJLiEO5MbRcCwWaDqalcR7gHl6oJdmU4zyX6Asnw8VH/JYG0UZJsndqpi/ApfhpQR4d919UFb2xKiIpJWwx5ZkInh7VzHXrB3mznyy/6cZGUjkZVlST4ytbXbsDfeqIyKZaYKA/gVQs5rBHFquRPJoQpKUSEcYgnuwzlV81WTCdpUk3AgkEU0o9RIdX8/JMK38qYh+F+6H2/V9Rr9f0JPZw90M4/32j9NX+JWT52RucNtMx5GxzZaX0POh3QIqKpQQcQwUw9qgYhgaK4oYGs0hKyU0gMnuhdhlR7bMGi7ni2xNSNen+PtRyM3TWxuuA/2p3lmifQyyWqKhFQdUZj6GWW9EAAuLKXZKwbxuz/fuqtZk8fjk9gTRqFTtUI53rRWzkgKy5kX8KiI/3WYlT6EFhbGhmUcpCflmtMoDz14li3zDxZdkvv7PzyWed2ilYRts8roQrBvVbMmASP5lhuaJG8pzzVpflcl7f5O0zhVzmk5PebWl6yaDt93HN+j1cFpN2x+kXkUgI34Hrgjt3sw2gDnpQxy+g2u3RbBsV1IDpJaWKwD1xw/v6u4TVbR6z78TQxfevuMmkbTq5JFSLa2lv6RtnE937ww4uOKeDjy72NvXcqAmB9GafIqwxmVio3NPWWTchzRA8mmEdQmbk8AgbdK1/qIkoPHAnYy+\",\r\n    \"telecom\": \"S\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/regist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"regist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 조회",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"ci\": \"02Ziy4xp21Hvnc9ICMUk7nVSZzQWPhgs7pbP7087TRpaGHeHnTsOeyt7GZKpUrXUEC1wt9Ins8XkJ2/lZE7AgxjM7GuRMmmNvvaCElX4x6O/dGezxxrGpJKg3r3le/kU\",\r\n    \"appKey\": \"lIqTXYfCEekh8h7qJrPHOF9YlOBm3cqbOojf26ix7tebk8AgbdK1/qIkoPHAnYy+\", \r\n    \"mobileNo\": \"1HC5y1iBkpeUKNB053/HCQ==\",\r\n    \"deviceInfo\": \"2JEyaVrhjC+69oQvPdnAAoE48MiJLiEO5MbRcCwWaDqalcR7gHl6oJdmU4zyX6Asnw8VH/JYG0UZJsndqpi/ApfhpQR4d919UFb2xKiIpJWwx5ZkInh7VzHXrB3mznyy/6cZGUjkZVlST4ytbXbsDfeqIyKZaYKA/gVQs5rBHFquRPJoQpKUSEcYgnuwzlV81WTCdpUk3AgkEU0o9RIdX8/JMK38qYh+F+6H2/V9Rr9f0JPZw90M4/32j9NX+JWT52RucNtMx5GxzZaX0POh3QIqKpQQcQwUw9qgYhgaK4oYGs0hKyU0gMnuhdhlR7bMGi7ni2xNSNen+PtRyM3TWxuuA/2p3lmifQyyWqKhFQdUZj6GWW9EAAuLKXZKwbxuz/fuqtZk8fjk9gTRqFTtUI53rRWzkgKy5kX8KiI/3WYlT6EFhbGhmUcpCflmtMoDz14li3zDxZdkvv7PzyWed2ilYRts8roQrBvVbMmASP5lhuaJG8pzzVpflcl7f5O0zhVzmk5PebWl6yaDt93HN+j1cFpN2x+kXkUgI34Hrgjt3sw2gDnpQxy+g2u3RbBsV1IDpJaWKwD1xw/v6u4TVbR6z78TQxfevuMmkbTq5JFSLa2lv6RtnE937ww4uOKeDjy72NvXcqAmB9GafIqwxmVio3NPWWTchzRA8mmEdQmbk8AgbdK1/qIkoPHAnYy+\",\r\n    \"telecom\": \"S\",\r\n    \"encKey\": \"bNUL3sF0zGtG41FJ13We+av0qzQaTUz5+tGwAZg708crUq5KIHdD8NYVEI50wGdUcLeCyBvJpugqYvjtR2jjfggtoPrPPZSrxrw7NYIzG4crFC2+AArGvTMccKKok1q2CzsyY2FIHxgs+yEbdBKV7RT98PZsuWQdpgUjVbBAuu13U+rPm02G22iLpA8zqoKloY7/slDgLldLXruwJCDmyNoisOUMyZonazTSgaui+9Lo7yHGxfVttzyOCPcmQav5lUyFlIPOT8gteivSSCjqBFHGs6/eZcinM40N4Zl5AKZNVYJdoA5VZPnlHF85aVKhzLDChd3dbJmbGObXmDokcw==\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/info",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"info"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 생성",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"ci\": \"02Ziy4xp21Hvnc9ICMUk7nVSZzQWPhgs7pbP7087TRpaGHeHnTsOeyt7GZKpUrXUEC1wt9Ins8XkJ2/lZE7AgxjM7GuRMmmNvvaCElX4x6O/dGezxxrGpJKg3r3le/kU\",\r\n    \"appKey\": \"lIqTXYfCEekh8h7qJrPHOF9YlOBm3cqbOojf26ix7tebk8AgbdK1/qIkoPHAnYy+\", \r\n    \"mobileNo\": \"1HC5y1iBkpeUKNB053/HCQ==\",\r\n    \"deviceInfo\": \"2JEyaVrhjC+69oQvPdnAAoE48MiJLiEO5MbRcCwWaDqalcR7gHl6oJdmU4zyX6Asnw8VH/JYG0UZJsndqpi/ApfhpQR4d919UFb2xKiIpJWwx5ZkInh7VzHXrB3mznyy/6cZGUjkZVlST4ytbXbsDfeqIyKZaYKA/gVQs5rBHFquRPJoQpKUSEcYgnuwzlV81WTCdpUk3AgkEU0o9RIdX8/JMK38qYh+F+6H2/V9Rr9f0JPZw90M4/32j9NX+JWT52RucNtMx5GxzZaX0POh3QIqKpQQcQwUw9qgYhgaK4oYGs0hKyU0gMnuhdhlR7bMGi7ni2xNSNen+PtRyM3TWxuuA/2p3lmifQyyWqKhFQdUZj6GWW9EAAuLKXZKwbxuz/fuqtZk8fjk9gTRqFTtUI53rRWzkgKy5kX8KiI/3WYlT6EFhbGhmUcpCflmtMoDz14li3zDxZdkvv7PzyWed2ilYRts8roQrBvVbMmASP5lhuaJG8pzzVpflcl7f5O0zhVzmk5PebWl6yaDt93HN+j1cFpN2x+kXkUgI34Hrgjt3sw2gDnpQxy+g2u3RbBsV1IDpJaWKwD1xw/v6u4TVbR6z78TQxfevuMmkbTq5JFSLa2lv6RtnE937ww4uOKeDjy72NvXcqAmB9GafIqwxmVio3NPWWTchzRA8mmEdQmbk8AgbdK1/qIkoPHAnYy+\",\r\n    \"telecom\": \"S\",\r\n    \"encKey\": \"bNUL3sF0zGtG41FJ13We+av0qzQaTUz5+tGwAZg708crUq5KIHdD8NYVEI50wGdUcLeCyBvJpugqYvjtR2jjfggtoPrPPZSrxrw7NYIzG4crFC2+AArGvTMccKKok1q2CzsyY2FIHxgs+yEbdBKV7RT98PZsuWQdpgUjVbBAuu13U+rPm02G22iLpA8zqoKloY7/slDgLldLXruwJCDmyNoisOUMyZonazTSgaui+9Lo7yHGxfVttzyOCPcmQav5lUyFlIPOT8gteivSSCjqBFHGs6/eZcinM40N4Zl5AKZNVYJdoA5VZPnlHF85aVKhzLDChd3dbJmbGObXmDokcw==\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/request",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"request"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 조회",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"qrCd\": \"iVBORw0KGgoAAAANSUhEUgAAAJYAAACWAQAAAAAUekxPAAAA5ElEQVR4Xu2UsQ7DMAhEvfmX2WDjlxkquXekSaS0U2GKgpCF3mAwBx7ry17jSh52O2ZjTIdl0MAcHskzrjOb8JgZtDETnl0MRYt2MbqJbkGd7Rr5D93+YWlOhdLKzIbi/rlCzx5UmIcIiw49c5QYEnAmTY20zALygOKQo6cVBrk9OJOcpQaGodQVSALSwQLLkhMuLLzOqE4MTbH2HlQYKfwz4h1s8e3bp9PA8m6o5OxCA3M6np8KdTDMDro6kQvT2cMsV3qcNVeZomDnx9jA4BScm7gaGDVCksBGx15zhV3sYTdnb3LnqeVA1wgeAAAAAElFTkSuQmCC\",\r\n    \"ci\": \"02Ziy4xp21Hvnc9ICMUk7nVSZzQWPhgs7pbP7087TRpaGHeHnTsOeyt7GZKpUrXUEC1wt9Ins8XkJ2/lZE7AgxjM7GuRMmmNvvaCElX4x6O/dGezxxrGpJKg3r3le/kU\",\r\n    \"encKey\": \"bNUL3sF0zGtG41FJ13We+av0qzQaTUz5+tGwAZg708crUq5KIHdD8NYVEI50wGdUcLeCyBvJpugqYvjtR2jjfggtoPrPPZSrxrw7NYIzG4crFC2+AArGvTMccKKok1q2CzsyY2FIHxgs+yEbdBKV7RT98PZsuWQdpgUjVbBAuu13U+rPm02G22iLpA8zqoKloY7/slDgLldLXruwJCDmyNoisOUMyZonazTSgaui+9Lo7yHGxfVttzyOCPcmQav5lUyFlIPOT8gteivSSCjqBFHGs6/eZcinM40N4Zl5AKZNVYJdoA5VZPnlHF85aVKhzLDChd3dbJmbGObXmDokcw==\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/check",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"check"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 이력 조회(내림차순, app, 첫페이지)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"ci\": \"02Ziy4xp21Hvnc9ICMUk7nVSZzQWPhgs7pbP7087TRpaGHeHnTsOeyt7GZKpUrXUEC1wt9Ins8XkJ2/lZE7AgxjM7GuRMmmNvvaCElX4x6O/dGezxxrGpJKg3r3le/kU\",\r\n    \"appKey\": \"lIqTXYfCEekh8h7qJrPHOF9YlOBm3cqbOojf26ix7tebk8AgbdK1/qIkoPHAnYy+\",\r\n    \"mobileNo\": \"1HC5y1iBkpeUKNB053/HCQ==\",\r\n    \"deviceInfo\": \"2JEyaVrhjC+69oQvPdnAAoE48MiJLiEO5MbRcCwWaDqalcR7gHl6oJdmU4zyX6Asnw8VH/JYG0UZJsndqpi/ApfhpQR4d919UFb2xKiIpJWwx5ZkInh7VzHXrB3mznyy/6cZGUjkZVlST4ytbXbsDfeqIyKZaYKA/gVQs5rBHFquRPJoQpKUSEcYgnuwzlV81WTCdpUk3AgkEU0o9RIdX8/JMK38qYh+F+6H2/V9Rr9f0JPZw90M4/32j9NX+JWT52RucNtMx5GxzZaX0POh3QIqKpQQcQwUw9qgYhgaK4oYGs0hKyU0gMnuhdhlR7bMGi7ni2xNSNen+PtRyM3TWxuuA/2p3lmifQyyWqKhFQdUZj6GWW9EAAuLKXZKwbxuz/fuqtZk8fjk9gTRqFTtUI53rRWzkgKy5kX8KiI/3WYlT6EFhbGhmUcpCflmtMoDz14li3zDxZdkvv7PzyWed2ilYRts8roQrBvVbMmASP5lhuaJG8pzzVpflcl7f5O0zhVzmk5PebWl6yaDt93HN+j1cFpN2x+kXkUgI34Hrgjt3sw2gDnpQxy+g2u3RbBsV1IDpJaWKwD1xw/v6u4TVbR6z78TQxfevuMmkbTq5JFSLa2lv6RtnE937ww4uOKeDjy72NvXcqAmB9GafIqwxmVio3NPWWTchzRA8mmEdQmbk8AgbdK1/qIkoPHAnYy+\",\r\n    \"telecom\": \"S\",\r\n    \"stDt\": \"20241009\",\r\n    \"endDt\": \"20241030\",\r\n    \"curListIndex\": \"1\",\r\n    \"reqListCnt\": \"5\",\r\n    \"order\": \"DESC\",\r\n    \"status\": \"A\",\r\n    \"range\": \"APP\",\r\n    \"encKey\": \"bNUL3sF0zGtG41FJ13We+av0qzQaTUz5+tGwAZg708crUq5KIHdD8NYVEI50wGdUcLeCyBvJpugqYvjtR2jjfggtoPrPPZSrxrw7NYIzG4crFC2+AArGvTMccKKok1q2CzsyY2FIHxgs+yEbdBKV7RT98PZsuWQdpgUjVbBAuu13U+rPm02G22iLpA8zqoKloY7/slDgLldLXruwJCDmyNoisOUMyZonazTSgaui+9Lo7yHGxfVttzyOCPcmQav5lUyFlIPOT8gteivSSCjqBFHGs6/eZcinM40N4Zl5AKZNVYJdoA5VZPnlHF85aVKhzLDChd3dbJmbGObXmDokcw==\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/hist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"hist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "QR 이력 조회(내림차순, 성공, 첫페이지)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"ci\": \"02Ziy4xp21Hvnc9ICMUk7nVSZzQWPhgs7pbP7087TRpaGHeHnTsOeyt7GZKpUrXUEC1wt9Ins8XkJ2/lZE7AgxjM7GuRMmmNvvaCElX4x6O/dGezxxrGpJKg3r3le/kU\",\r\n    \"appKey\": \"lIqTXYfCEekh8h7qJrPHOF9YlOBm3cqbOojf26ix7tebk8AgbdK1/qIkoPHAnYy+\",\r\n    \"mobileNo\": \"1HC5y1iBkpeUKNB053/HCQ==\",\r\n    \"deviceInfo\": \"2JEyaVrhjC+69oQvPdnAAoE48MiJLiEO5MbRcCwWaDqalcR7gHl6oJdmU4zyX6Asnw8VH/JYG0UZJsndqpi/ApfhpQR4d919UFb2xKiIpJWwx5ZkInh7VzHXrB3mznyy/6cZGUjkZVlST4ytbXbsDfeqIyKZaYKA/gVQs5rBHFquRPJoQpKUSEcYgnuwzlV81WTCdpUk3AgkEU0o9RIdX8/JMK38qYh+F+6H2/V9Rr9f0JPZw90M4/32j9NX+JWT52RucNtMx5GxzZaX0POh3QIqKpQQcQwUw9qgYhgaK4oYGs0hKyU0gMnuhdhlR7bMGi7ni2xNSNen+PtRyM3TWxuuA/2p3lmifQyyWqKhFQdUZj6GWW9EAAuLKXZKwbxuz/fuqtZk8fjk9gTRqFTtUI53rRWzkgKy5kX8KiI/3WYlT6EFhbGhmUcpCflmtMoDz14li3zDxZdkvv7PzyWed2ilYRts8roQrBvVbMmASP5lhuaJG8pzzVpflcl7f5O0zhVzmk5PebWl6yaDt93HN+j1cFpN2x+kXkUgI34Hrgjt3sw2gDnpQxy+g2u3RbBsV1IDpJaWKwD1xw/v6u4TVbR6z78TQxfevuMmkbTq5JFSLa2lv6RtnE937ww4uOKeDjy72NvXcqAmB9GafIqwxmVio3NPWWTchzRA8mmEdQmbk8AgbdK1/qIkoPHAnYy+\",\r\n    \"telecom\": \"S\",\r\n    \"stDt\": \"20241009\",\r\n    \"endDt\": \"20241022\",\r\n    \"curListIndex\": \"1\",\r\n    \"reqListCnt\": \"5\",\r\n    \"order\": \"DESC\",\r\n    \"status\": \"S\",\r\n    \"range\": \"APP\",\r\n    \"encKey\": \"bNUL3sF0zGtG41FJ13We+av0qzQaTUz5+tGwAZg708crUq5KIHdD8NYVEI50wGdUcLeCyBvJpugqYvjtR2jjfggtoPrPPZSrxrw7NYIzG4crFC2+AArGvTMccKKok1q2CzsyY2FIHxgs+yEbdBKV7RT98PZsuWQdpgUjVbBAuu13U+rPm02G22iLpA8zqoKloY7/slDgLldLXruwJCDmyNoisOUMyZonazTSgaui+9Lo7yHGxfVttzyOCPcmQav5lUyFlIPOT8gteivSSCjqBFHGs6/eZcinM40N4Zl5AKZNVYJdoA5VZPnlHF85aVKhzLDChd3dbJmbGObXmDokcw==\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/qr/hist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"qr",
+										"hist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 해지",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"ci\": \"02Ziy4xp21Hvnc9ICMUk7nVSZzQWPhgs7pbP7087TRpaGHeHnTsOeyt7GZKpUrXUEC1wt9Ins8XkJ2/lZE7AgxjM7GuRMmmNvvaCElX4x6O/dGezxxrGpJKg3r3le/kU\",\r\n    \"encKey\": \"bNUL3sF0zGtG41FJ13We+av0qzQaTUz5+tGwAZg708crUq5KIHdD8NYVEI50wGdUcLeCyBvJpugqYvjtR2jjfggtoPrPPZSrxrw7NYIzG4crFC2+AArGvTMccKKok1q2CzsyY2FIHxgs+yEbdBKV7RT98PZsuWQdpgUjVbBAuu13U+rPm02G22iLpA8zqoKloY7/slDgLldLXruwJCDmyNoisOUMyZonazTSgaui+9Lo7yHGxfVttzyOCPcmQav5lUyFlIPOT8gteivSSCjqBFHGs6/eZcinM40N4Zl5AKZNVYJdoA5VZPnlHF85aVKhzLDChd3dbJmbGObXmDokcw==\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/terminate",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"terminate"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "비정상 케이스",
+					"item": [
+						{
+							"name": "신분 등록 (개인키 복호화 오류)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"birthDay\": \"6ih/g4wg64qMa6Gw8bZARQ==\",\r\n    \"subCode\": \"fOIUScQgfZ6yc38wsJJkTw==\",\r\n    \"userName\": \"NQFZGSUkhdQqDSwMs8UIBw==\",\r\n    \"issuedYmd\": \"oupCMSH7re/rhSkoxpqYFQ==\",\r\n    \"encKey\": \"error\",\r\n    \"ci\": \"02Ziy4xp21Hvnc9ICMUk7nVSZzQWPhgs7pbP7087TRpaGHeHnTsOeyt7GZKpUrXUEC1wt9Ins8XkJ2/lZE7AgxjM7GuRMmmNvvaCElX4x6O/dGezxxrGpJKg3r3le/kU\",\r\n    \"appKey\": \"lIqTXYfCEekh8h7qJrPHOF9YlOBm3cqbOojf26ix7tebk8AgbdK1/qIkoPHAnYy+\", \r\n    \"mobileNo\": \"1HC5y1iBkpeUKNB053/HCQ==\",\r\n    \"deviceInfo\": \"2JEyaVrhjC+69oQvPdnAAoE48MiJLiEO5MbRcCwWaDqalcR7gHl6oJdmU4zyX6Asnw8VH/JYG0UZJsndqpi/ApfhpQR4d919UFb2xKiIpJWwx5ZkInh7VzHXrB3mznyy/6cZGUjkZVlST4ytbXbsDfeqIyKZaYKA/gVQs5rBHFquRPJoQpKUSEcYgnuwzlV81WTCdpUk3AgkEU0o9RIdX8/JMK38qYh+F+6H2/V9Rr9f0JPZw90M4/32j9NX+JWT52RucNtMx5GxzZaX0POh3QIqKpQQcQwUw9qgYhgaK4oYGs0hKyU0gMnuhdhlR7bMGi7ni2xNSNen+PtRyM3TWxuuA/2p3lmifQyyWqKhFQdUZj6GWW9EAAuLKXZKwbxuz/fuqtZk8fjk9gTRqFTtUI53rRWzkgKy5kX8KiI/3WYlT6EFhbGhmUcpCflmtMoDz14li3zDxZdkvv7PzyWed2ilYRts8roQrBvVbMmASP5lhuaJG8pzzVpflcl7f5O0zhVzmk5PebWl6yaDt93HN+j1cFpN2x+kXkUgI34Hrgjt3sw2gDnpQxy+g2u3RbBsV1IDpJaWKwD1xw/v6u4TVbR6z78TQxfevuMmkbTq5JFSLa2lv6RtnE937ww4uOKeDjy72NvXcqAmB9GafIqwxmVio3NPWWTchzRA8mmEdQmbk8AgbdK1/qIkoPHAnYy+\",\r\n    \"telecom\": \"S\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/regist",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"regist"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "신분 조회 (appKey 불일치)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\r\n    \"ci\": \"3wk9k1lKw9gd3w1cix86mHVSZzQWPhgs7pbP7087TRpaGHeHnTsOeyt7GZKpUrXUEC1wt9Ins8XkJ2/lZE7AgxjM7GuRMmmNvvaCElX4x6O/dGezxxrGpJKg3r3le/kU\",\r\n    \"appKey\": \"lIqTXYfCEekh8h7qJrPHON9+b7cjIgApFn55nyO8uMKbk8AgbdK1/qIkoPHAnYy+\", \r\n    \"mobileNo\": \"9SdaYvAyl6AkN9nNPjWUNg==\",\r\n    \"deviceInfo\": \"AzLuZ9vg+EySDTUku9ifkoE48MiJLiEO5MbRcCwWaDqalcR7gHl6oJdmU4zyX6Asnw8VH/JYG0UZJsndqpi/ApfhpQR4d919UFb2xKiIpJWwx5ZkInh7VzHXrB3mznyy/6cZGUjkZVlST4ytbXbsDfeqIyKZaYKA/gVQs5rBHFquRPJoQpKUSEcYgnuwzlV81WTCdpUk3AgkEU0o9RIdX8/JMK38qYh+F+6H2/V9Rr9f0JPZw90M4/32j9NX+JWT52RucNtMx5GxzZaX0POh3QIqKpQQcQwUw9qgYhgaK4oYGs0hKyU0gMnuhdhlR7bMGi7ni2xNSNen+PtRyM3TWxuuA/2p3lmifQyyWqKhFQdUZj6GWW9EAAuLKXZKwbxuz/fuqtZk8fjk9gTRqFTtUI53rRWzkgKy5kX8KiI/3WYlT6EFhbGhmUcpCflmtMoDz14li3zDxZdkvv7PzyWed2ilYRts8roQrBvVbMmASP5lhuaJG8pzzVpflcl7f5O0zhVzmk5PebWl6yaDt93HN+j1cFpN2x+kXkUgI34Hrgjt3sw2gDnpQxy+g2u3RbBsV1IDpJaWKwD1xw/v6u4TVbR6z78TQxfevuMmkbTq5JFSLa2lv6RtnE937ww4uOKeDjy72NvXcqAmB9GafIqwxmVio3NPWWTchzRA8mmEdQmbk8AgbdK1/qIkoPHAnYy+\",\r\n    \"telecom\": \"L\",\r\n    \"encKey\": \"bNUL3sF0zGtG41FJ13We+av0qzQaTUz5+tGwAZg708crUq5KIHdD8NYVEI50wGdUcLeCyBvJpugqYvjtR2jjfggtoPrPPZSrxrw7NYIzG4crFC2+AArGvTMccKKok1q2CzsyY2FIHxgs+yEbdBKV7RT98PZsuWQdpgUjVbBAuu13U+rPm02G22iLpA8zqoKloY7/slDgLldLXruwJCDmyNoisOUMyZonazTSgaui+9Lo7yHGxfVttzyOCPcmQav5lUyFlIPOT8gteivSSCjqBFHGs6/eZcinM40N4Zl5AKZNVYJdoA5VZPnlHF85aVKhzLDChd3dbJmbGObXmDokcw==\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.10.173:8080/api/idv/rrc/info",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"10",
+										"173"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"idv",
+										"rrc",
+										"info"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "암복호화",
+			"item": [
+				{
+					"name": "데이터 암호화",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n    \"birthDay\": \"19990909\",\n    \"subCode\": \"1090909\",\n    \"userName\": \"김공구\",\n    \"issuedYmd\": \"20240101\",\n    \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\",\n    \"ci\": \"9R2Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n    \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \n    \"mobileNo\": \"01009090909\",\n    \"deviceInfo\": \"9ELl946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n    \"telecom\": \"S\"\n}\n\n// 박공삼\n// {\n//     \"agencyToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.agency1Payload.1234567890ABCDEF1234567890ABCDEF\",\n//     \"applicationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.app1Payload.1234567890ABCDEF1234567890ABCDEF\",\n//     \"birthDay\": \"20030303\",\n//     \"subCode\": \"3030303\",\n//     \"userName\": \"박공삼\",\n//     \"issuedYmd\": \"20240303\",\n//     \"encKey\": \"JAJ7ENCR6bjsJA8wN7LvHEC4pnfNQMFE\",\n//     \"ci\": \"303Sa1A4WByuSDScjY7jBXhNilCimE6RNCNqVU8Q0QzY5fvFPbKxgAtXK5WwFIIFyZQxh29QDGLVYIcILnX5HIf8\",\n//     \"appKey\": \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\", \n//     \"mobileNo\": \"01003030303\",\n//     \"deviceInfo\": \"3030946Hz2dZy8Vt0tg7ReUlbjNxvsmErKWXPfCPq0OUkBJ1EdweFmGgUEr1NnIILeeP0P6YvzCn9qFyrAu7CeQp6SWdeiVZlmtup4jN8t0ttLWl9eMWGt7eYHus4IRtmxLYkIBcPMAOZmCqlh0dsLTccYmIPTjEY1zoRFpelOVdaztFHesTWQFy0YVvW9edaiTRr3EhMsckAqBmR9vfRsgoDrDG5vRSq8tRX5g7O3Ru4oa6dsi2KI8ULMZGDQJmn3AupeeSM20TrUmc7WnVrm4XfivTzK7PFgsmEYuP2URo5PXOeCJcFyg17dj8MD9IWHGN89eVQfRrEVhBep0wZ3RFTpo4YjxCOrSpLdFe0J7rqZGa6vycVLnYz4WmNlOWIVhfRpMTYXzFQWXPT8cHhN4vIan3ZoLCBsJ5u3cB1jVmAo0f1WtG6QwW6RApIxt5ZaTxJ3K8HcO5l9oAdqftGT99yFnLZPCBD0f21eFuvAR6K6AzrhMgLoF49uIdKR8r\",\n//     \"telecom\": \"L\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.10.173:8080/api/idv/test/encrypt",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"10",
+								"173"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"idv",
+								"test",
+								"encrypt"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "데이터 복호화",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resultCode\": \"S00000\",\n    \"resultMessage\": \"SUCCESS\",\n    \"retData\": {\n        \"qrCd\": \"iVBORw0KGgoAAAANSUhEUgAAAJYAAACWAQAAAAAUekxPAAAA6UlEQVR4Xu2VvQ6EQAiE6XhluqXjlSku2ZtZc3HjdUJlJP7gZwFhBpX5Fx+5kpc9jrmI5ohUJg0scESKDSYdzDVcNFbSxFJGaiOLmei5iREba2wzKDBKE4yLbncZw9nwkZYZ+gXKMV19NLA0wbMpCuWv5wqDf0g4A+tgKcwTb/SsW2G2mlYOIzoYLG5L92WjMqN3BlwePBsYejaD3LiP2cCweb6obL4vMMZqeRmpzo4dTMOFe1NmmGNwDkrdO5hTdD2kamJuYlztvUaFcRG523uN2wwHGuYzo8yWRviJ4hNx+qrALvGyh7MvVpJ7QSz4ZncAAAAASUVORK5CYII=\",\n        \"birthDay\": \"6ih/g4wg64qMa6Gw8bZARQ==\",\n        \"subCode\": \"fOIUScQgfZ6yc38wsJJkTw==\",\n        \"userName\": \"NQFZGSUkhdQqDSwMs8UIBw==\",\n        \"issuedYmd\": \"oupCMSH7re/rhSkoxpqYFQ==\",\n        \"address\": \"kmAGLzFPIXHCGT5cI4Vk26ylUdebWQywmlVWc2yaCOM=\",\n        \"detailAddress\": \"+1MShlg6Qnk/IiHO2kD7adUAAII/R0kSymbiI3mQ3aI=\",\n        \"photo\": \"+ZcQsTYMcMVY56RGuoUDLA==\",\n        \"issuOrgName\": \"w2XiOBbKHxskztEGnlOceg==\"\n    }\n    ,\n    \"appKey\" : \"MyVC8d1LtFA5BymW0EXF20V0rioYt5kY\"\n        \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.10.173:8080/api/idv/test/decrypt",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"10",
+								"173"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"idv",
+								"test",
+								"decrypt"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

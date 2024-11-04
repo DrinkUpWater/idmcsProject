@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 카멜 케이스 변환 설정 -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="com.inside.idmcs.api.common.model.vo.req.PublicKeyReqVO" alias="PublicKeyReqVO"/>
+        <typeAlias type="com.inside.idmcs.api.common.model.dto.RequestInfo" alias="RequestInfo"/>
+        <typeAlias type="com.inside.idmcs.api.common.model.dto.InstitutionAndApplicationInfo" alias="InstitutionAndApplicationInfo"/>
+        <typeAlias type="com.inside.idmcs.api.common.error.ErrorCode" alias="ErrorCode"/>
+        <typeAlias type="com.inside.idmcs.api.common.model.vo.req.ReqVO" alias="ReqVO"/>
+        <typeAlias type="com.inside.idmcs.api.common.model.dto.IdInfo" alias="IdInfo"/>
+        <typeAlias type="com.inside.idmcs.api.common.model.vo.db.Employee" alias="Employee"/>
+        <typeAlias type="com.inside.idmcs.api.common.model.vo.res.QRCheckHistory" alias="QRCheckHistory"/>
+        <typeAlias type="com.inside.idmcs.api.common.model.vo.req.QRHistoryReqVO" alias="QRHistoryReqVO"/>
+        <typeAlias type="com.inside.idmcs.api.common.model.vo.db.QRHistory" alias="QRHistory"/>
+    </typeAliases>
+    
+    <mappers>
+        <mapper resource="mybatis/mappers/logging-mapper.xml"/>
+        <mapper resource="mybatis/mappers/publicKey-mapper.xml"/>
+        <mapper resource="mybatis/mappers/idRegistration-mapper.xml"/>
+        <mapper resource="mybatis/mappers/idCheck-mapper.xml"/>
+        <mapper resource="mybatis/mappers/idTermination-mapper.xml"/>
+        <mapper resource="mybatis/mappers/qRHistory-mapper.xml"/>
+    </mappers>
+
+</configuration>

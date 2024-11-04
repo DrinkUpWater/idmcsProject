@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inside.idmcs.api.enc.pk.dao.PublicKeyDao">
+	
+	<!--기관앱 정보 select문-->
+	 <select id="selectInstAndAppInfo" resultType="InstitutionAndApplicationInfo">
+		WITH inst_app_data AS (
+		    SELECT i.inst_no,
+		           i.inst_nm,
+		           i.inst_token,
+		           TO_CHAR(i.vld_bgng_ymd, 'YYYYMMDD') AS inst_vld_bgng_ymd,
+           		   TO_CHAR(i.vld_end_ymd, 'YYYYMMDD') AS inst_vld_end_ymd,
+		           a.app_no,
+		           a.app_nm,
+		           a.app_token,
+		           TO_CHAR(a.vld_bgng_ymd, 'YYYYMMDD') AS app_vld_bgng_ymd,
+          	 	   TO_CHAR(a.vld_end_ymd, 'YYYYMMDD') AS app_vld_end_ymd,
+          	 	   a.public_key,
+          	 	   a.private_key,
+          	 	   TO_CHAR(a.key_vld_bgng_ymd, 'YYYYMMDD') AS key_vld_bgng_ymd,
+          	 	   TO_CHAR(a.key_vld_end_ymd, 'YYYYMMDD') AS key_vld_end_ymd,
+          	 	   i.use_psblty_yn AS instStatus,
+          	 	   a.use_psblty_yn AS appStatus
+		    FROM application a
+		    JOIN institution i ON i.inst_no = a.inst_no
+		    WHERE i.inst_token = #{agencyToken}
+		      AND a.app_token = #{applicationToken}
+		      <!--AND i.use_psblty_yn = 'Y'
+		      AND a.use_psblty_yn = 'Y'-->
+		),
+		ip_list_data AS (
+		    SELECT a.app_no, STRING_AGG(ip.ip, ',' ORDER BY ip.ip) AS ip_list
+		    FROM ip ip
+		    JOIN application a ON a.app_no = ip.app_no
+		    WHERE a.app_token = #{applicationToken}
+		    	AND ip.use_psblty_yn = 'Y'
+		    GROUP BY a.app_no
+		),
+		url_list_data AS (
+		    SELECT a.app_no, STRING_AGG(u.url, ',' ORDER BY u.url) AS url_list
+		    FROM api_url au
+		    JOIN url u ON au.url_no = u.url_no
+		    JOIN application a ON a.app_no = au.app_no
+		    WHERE a.app_token = #{applicationToken}
+		    	AND u.use_psblty_yn = 'Y'
+		    GROUP BY a.app_no
+		)
+		SELECT i.*, ip.ip_list, url.url_list
+		FROM inst_app_data i
+		LEFT JOIN ip_list_data ip ON i.app_no = ip.app_no
+		LEFT JOIN url_list_data url ON i.app_no = url.app_no;
+	</select>
+		
+	<update id="updateKeyPairInfoToApplication">
+		UPDATE application
+			SET public_key = #{publicKey},
+				private_key = #{privateKey},
+				key_vld_bgng_ymd = TO_DATE(#{keyVldBgngYmd}, 'YYYYMMDD'),
+				key_vld_end_ymd = TO_DATE(#{keyVldEndYmd}, 'YYYYMMDD'),
+			    updt_dt = CURRENT_TIMESTAMP
+		WHERE app_no = #{appNo};
+	</update>
+		
+</mapper>

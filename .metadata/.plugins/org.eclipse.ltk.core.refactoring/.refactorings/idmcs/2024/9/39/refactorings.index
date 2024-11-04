@@ -1,0 +1,26 @@
+1727078451926	Rename type 'application'
+1727078455430	Rename type 'institution'
+1727078459007	Rename type 'ip'
+1727078462371	Rename type 'photo'
+1727078824399	Rename type 'PkReqVO'
+1727137794295	Rename type 'PkController'
+1727142895473	Rename type 'ReqVO'
+1727143715148	Rename type 'Logging'
+1727143745295	Delete element
+1727144289466	Move compilation unit
+1727144679938	Rename type 'QRHistoryService'
+1727156799712	Delete element
+1727156863924	Rename type 'Filter'
+1727157604217	Rename type 'Util'
+1727158875602	Delete element
+1727158913449	Rename resource 'menu-mapper.xml'
+1727159266728	Delete element
+1727161780732	Move compilation unit
+1727162395549	Delete element
+1727162455803	Copy file
+1727162478568	Rename resource 'logging-mapper2.xml'
+1727252182446	Rename compilation unit 'ValidationException.java'
+1727336707689	Delete element
+1727412480741	Delete element
+1727412489780	Copy file
+1727414570783	Delete element

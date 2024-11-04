@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;idmcs/postman/신분확인 시스템 테스트.postman_collection.json&apos; to &apos;idmc_test_script.postman_collection.json&apos;" description="Rename resource &apos;신분확인 시스템 테스트.postman_collection.json&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="postman/신분확인 시스템 테스트.postman_collection.json" name="idmc_test_script.postman_collection.json" stamp="1730190863146" updateReferences="true"/>
+</session>

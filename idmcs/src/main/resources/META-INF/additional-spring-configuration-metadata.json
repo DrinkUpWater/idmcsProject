@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "encryption.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'encryption.enabled'"
+  },
+  {
+    "name": "qr.timeout.sec",
+    "type": "java.lang.String",
+    "description": "A description for 'qr.timeout.sec'"
+  },
+  {
+    "name": "qr.timeout.margin.sec",
+    "type": "java.lang.String",
+    "description": "A description for 'qr.timeout.margin.sec'"
+  }
+]}

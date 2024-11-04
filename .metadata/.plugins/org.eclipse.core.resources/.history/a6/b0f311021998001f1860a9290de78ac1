@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inside.idmcs.api.id.check.dao.IdCheckDao">
+		
+	<select id="selectIdInfo">
+		SELECT emp_id AS userId,
+			   emp_nm AS userName,
+			   TO_CHAR(emp_brdt, 'YYYYMMDD') AS birthDay, 
+			   emp_ssn_back AS subCode, 
+			   TO_CHAR(issu_ymd, 'YYYYMMDD') AS issuedYmd, 
+			   emp_addr AS address, 
+			   emp_daddr AS detailAddress, 
+			   inst_nm AS issuedInstNm, 
+			   emp_telno AS mobileNo, 
+			   emp_telecom AS telecom, 
+			   emp_device_info AS deviceInfo, 
+			   emp_stts AS status, 
+			   emp_id_stts AS idStatus, 
+			   emp_ci AS ci, 
+			   app_key,
+			   stts AS registYn
+		FROM employee 
+		WHERE emp_ci = #{ci};
+	</select>
+	
+	<update id="updateIdInfo">
+		UPDATE employee
+			set emp_brdt = TO_DATE(#{birthDay}, 'YYYYMMDD'),
+				emp_nm = #{userName},
+				emp_ssn_back = #{subCode},
+				issu_ymd = TO_DATE(#{issuedYmd}, 'YYYYMMDD'),
+				emp_ci = #{ci},
+				emp_addr = #{address},
+				emp_daddr = #{detailAddress},
+				emp_telno = #{mobileNo},
+				emp_telecom = #{telecom},
+				emp_stts = #{status},
+				emp_id_stts = #{idStatus},
+				emp_device_info = #{deviceInfo},
+				inst_nm = #{issuedInstNm},
+				app_key = #{appKey}
+		WHERE emp_id = #{userId}
+	</update>
+	
+	<select id="selectIdInfoWithUserId">
+		SELECT emp_id AS userId,
+			   emp_nm AS userName,
+			   TO_CHAR(emp_brdt, 'YYYYMMDD') AS birthDay, 
+			   emp_ssn_back AS subCode, 
+			   TO_CHAR(issu_ymd, 'YYYYMMDD') AS issuedYmd, 
+			   emp_addr AS address, 
+			   emp_daddr AS detailAddress, 
+			   inst_nm AS issuedInstNm, 
+			   emp_telno AS mobileNo, 
+			   emp_telecom AS telecom, 
+			   emp_device_info AS deviceInfo, 
+			   emp_stts AS status, 
+			   emp_id_stts AS idStatus, 
+			   emp_ci AS ci, 
+			   app_key,
+			   stts AS registYn,
+			   photo_data AS photo
+		FROM employee 
+		JOIN
+		WHERE emp_id = #{userId};
+	</select>
+	
+	<select id="selectPhotoData">
+		SELECT photo_data FROM photo
+		WHERE emp_id = #{userId}
+			AND	stts = 'Y';
+	</select>
+	
+</mapper>

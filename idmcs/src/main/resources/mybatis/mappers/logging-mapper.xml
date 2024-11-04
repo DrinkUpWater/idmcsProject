@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inside.idmcs.api.common.util.logging.dao.LoggingDao">
+
+	<insert id="saveLogWithReqVO" parameterType="ReqVO">
+	    MERGE INTO log l
+	    USING (
+	        SELECT #{logPk} AS ymd
+	    ) AS src
+	    ON l.ymd = src.ymd
+	    WHEN MATCHED THEN
+	        UPDATE SET
+	            <trim suffixOverrides=",">    
+	                <if test="reqVO.agencyToken != null">inst_token = #{reqVO.agencyToken},</if>
+	                <if test="reqVO.applicationToken != null">app_token = #{reqVO.applicationToken},</if>
+	                <if test="reqVO.birthDay != null">emp_brdt = #{reqVO.birthDay},</if>
+	                <if test="reqVO.subCode != null">emp_ssn_back = #{reqVO.subCode},</if>
+	                <if test="reqVO.userName != null">emp_nm = #{reqVO.userName},</if>
+	                <if test="reqVO.issuedYmd != null">issu_ymd = #{reqVO.issuedYmd},</if>
+	                <if test="reqVO.encKey != null">enc_key = #{reqVO.encKey},</if>
+	                <if test="reqVO.ci != null">emp_ci = #{reqVO.ci},</if>
+	                <if test="reqVO.appKey != null">app_key = #{reqVO.appKey},</if>
+	                <if test="reqVO.mobileNo != null">emp_telno = #{reqVO.mobileNo},</if>
+	                <if test="reqVO.deviceInfo != null">emp_device_info = #{reqVO.deviceInfo},</if>
+	                <if test="reqVO.telecom != null">emp_telecom = #{reqVO.telecom},</if>
+	                <if test="reqVO.qrCd != null">qr_cd = #{reqVO.qrCd},</if>
+	                <if test="reqVO.stDt != null">inq_bgng_ymd = #{reqVO.stDt},</if>
+	                <if test="reqVO.endDt != null">inq_end_ymd = #{reqVO.endDt},</if>
+	                <if test="reqVO.curListIndex != null">bgng_index = #{reqVO.curListIndex},</if>
+	                <if test="reqVO.reqListCnt != null">req_list_cnt = #{reqVO.reqListCnt},</if>
+	                <if test="reqVO.order != null">qr_sort = #{reqVO.order},</if>
+	                <if test="reqVO.status != null">qr_use_ny = #{reqVO.status},</if>
+	                <if test="reqVO.range != null">qr_range = #{reqVO.range}</if>
+	            </trim>
+	    WHEN NOT MATCHED THEN
+	        INSERT (
+	            ymd,
+	            <trim suffixOverrides=",">
+	                <if test="reqVO.agencyToken != null">inst_token,</if>
+	                <if test="reqVO.applicationToken != null">app_token,</if>
+	                <if test="reqVO.birthDay != null">emp_brdt,</if>
+	                <if test="reqVO.subCode != null">emp_ssn_back,</if>
+	                <if test="reqVO.userName != null">emp_nm,</if>
+	                <if test="reqVO.issuedYmd != null">issu_ymd,</if>
+	                <if test="reqVO.encKey != null">enc_key,</if>
+	                <if test="reqVO.ci != null">emp_ci,</if>
+	                <if test="reqVO.appKey != null">app_key,</if>
+	                <if test="reqVO.mobileNo != null">emp_telno,</if>
+	                <if test="reqVO.deviceInfo != null">emp_device_info,</if>
+	                <if test="reqVO.telecom != null">emp_telecom,</if>
+	                <if test="reqVO.qrCd != null">qr_cd,</if>
+	                <if test="reqVO.stDt != null">inq_bgng_ymd,</if>
+	                <if test="reqVO.endDt != null">inq_end_ymd,</if>
+	                <if test="reqVO.curListIndex != null">bgng_index,</if>
+	                <if test="reqVO.reqListCnt != null">req_list_cnt,</if>
+	                <if test="reqVO.order != null">qr_sort,</if>
+	                <if test="reqVO.status != null">qr_use_ny,</if>
+	                <if test="reqVO.range != null">qr_range</if>
+	            </trim>
+	        )
+	        VALUES (
+	            #{logPk},
+	            <trim suffixOverrides=",">
+	                <if test="reqVO.agencyToken != null">#{reqVO.agencyToken},</if>
+	                <if test="reqVO.applicationToken != null">#{reqVO.applicationToken},</if>
+	                <if test="reqVO.birthDay != null">#{reqVO.birthDay},</if>
+	                <if test="reqVO.subCode != null">#{reqVO.subCode},</if>
+	                <if test="reqVO.userName != null">#{reqVO.userName},</if>
+	                <if test="reqVO.issuedYmd != null">#{reqVO.issuedYmd},</if>
+	                <if test="reqVO.encKey != null">#{reqVO.encKey},</if>
+	                <if test="reqVO.ci != null">#{reqVO.ci},</if>
+	                <if test="reqVO.appKey != null">#{reqVO.appKey},</if>
+	                <if test="reqVO.mobileNo != null">#{reqVO.mobileNo},</if>
+	                <if test="reqVO.deviceInfo != null">#{reqVO.deviceInfo},</if>
+	                <if test="reqVO.telecom != null">#{reqVO.telecom},</if>
+	                <if test="reqVO.qrCd != null">#{reqVO.qrCd},</if>
+	                <if test="reqVO.stDt != null">#{reqVO.stDt},</if>
+	                <if test="reqVO.endDt != null">#{reqVO.endDt},</if>
+	                <if test="reqVO.curListIndex != null">#{reqVO.curListIndex},</if>
+	                <if test="reqVO.reqListCnt != null">#{reqVO.reqListCnt},</if>
+	                <if test="reqVO.order != null">#{reqVO.order},</if>
+	                <if test="reqVO.status != null">#{reqVO.status},</if>
+	                <if test="reqVO.range != null">#{reqVO.range}</if>
+	            </trim>
+	        );
+	</insert>
+	
+	<insert id="saveLogWithError">
+	    MERGE INTO log l
+		    USING (
+		        SELECT #{logPk} AS ymd
+		    ) AS src
+		    ON l.ymd = src.ymd
+		    WHEN MATCHED THEN
+		        UPDATE SET
+		            res_cd = #{errorCode},
+		            res_msg = #{errorMsg}
+		    WHEN NOT MATCHED THEN
+		        INSERT (
+		            ymd,
+		            res_cd,
+		            res_msg
+		        )
+		        VALUES (
+		            #{logPk},
+		            #{errorCode},
+		            #{errorMsg}
+		        );
+	</insert>
+
+    <insert id="saveLogWithInstAndAppInfo">
+		MERGE INTO log l
+	    USING (
+	        SELECT #{logPk} AS ymd
+	    ) AS src
+	    ON l.ymd = src.ymd
+	    WHEN MATCHED THEN
+	        UPDATE SET
+	            inst_no = #{instAndAppInfo.instNo},
+	            inst_nm = #{instAndAppInfo.instNm},
+	            inst_token = #{instAndAppInfo.instToken},
+	            inst_vld_bgng_ymd = TO_DATE(#{instAndAppInfo.instVldBgngYmd}, 'YYYYMMDD'),
+	            inst_vld_end_ymd = TO_DATE(#{instAndAppInfo.instVldEndYmd}, 'YYYYMMDD'),
+	            app_no = #{instAndAppInfo.appNo},
+	            app_nm = #{instAndAppInfo.appNm},
+	            app_token = #{instAndAppInfo.appToken},
+	            app_vld_bgng_ymd = TO_DATE(#{instAndAppInfo.appVldBgngYmd}, 'YYYYMMDD'),
+	            app_vld_end_ymd = TO_DATE(#{instAndAppInfo.appVldEndYmd}, 'YYYYMMDD'),
+	            <if test="instAndAppInfo.publicKey != null">
+	                public_key = #{instAndAppInfo.publicKey},
+	            </if>
+	            <if test="instAndAppInfo.privateKey != null">
+	                private_key = #{instAndAppInfo.privateKey},
+	            </if>
+	            <if test="instAndAppInfo.keyVldBgngYmd != null">
+	                key_vld_bgng_ymd = TO_DATE(#{instAndAppInfo.keyVldBgngYmd}, 'YYYYMMDD'),
+	            </if>
+	            <if test="instAndAppInfo.keyVldEndYmd != null">
+	                key_vld_end_ymd = TO_DATE(#{instAndAppInfo.keyVldEndYmd}, 'YYYYMMDD'),
+	            </if>
+	            updt_dt = CURRENT_TIMESTAMP
+	    WHEN NOT MATCHED THEN
+	        INSERT (
+	            ymd,
+	            inst_no,
+	            inst_nm,
+	            inst_token,
+	            inst_vld_bgng_ymd,
+	            inst_vld_end_ymd,
+	            app_no,
+	            app_nm,
+	            app_token,
+	            app_vld_bgng_ymd,
+	            app_vld_end_ymd,
+	            <if test="instAndAppInfo.publicKey != null">
+	                public_key,
+	            </if>
+	            <if test="instAndAppInfo.privateKey != null">
+	                private_key,
+	            </if>
+	            <if test="instAndAppInfo.keyVldBgngYmd != null">
+	                key_vld_bgng_ymd,
+	            </if>
+	            <if test="instAndAppInfo.keyVldEndYmd != null">
+	                key_vld_end_ymd,
+	            </if>
+	            updt_dt
+	        )
+	        VALUES (
+	            #{logPk},
+	            #{instAndAppInfo.instNo},
+	            #{instAndAppInfo.instNm},
+	            #{instAndAppInfo.instToken},
+	            TO_DATE(#{instAndAppInfo.instVldBgngYmd}, 'YYYYMMDD'),
+	            TO_DATE(#{instAndAppInfo.instVldEndYmd}, 'YYYYMMDD'),
+	            #{instAndAppInfo.appNo},
+	            #{instAndAppInfo.appNm},
+	            #{instAndAppInfo.appToken},
+	            TO_DATE(#{instAndAppInfo.appVldBgngYmd}, 'YYYYMMDD'),
+	            TO_DATE(#{instAndAppInfo.appVldEndYmd}, 'YYYYMMDD'),
+	            <if test="instAndAppInfo.publicKey != null">
+	                #{instAndAppInfo.publicKey},
+	            </if>
+	            <if test="instAndAppInfo.privateKey != null">
+	                #{instAndAppInfo.privateKey},
+	            </if>
+	            <if test="instAndAppInfo.keyVldBgngYmd != null">
+	                TO_DATE(#{instAndAppInfo.keyVldBgngYmd}, 'YYYYMMDD'),
+	            </if>
+	            <if test="instAndAppInfo.keyVldEndYmd != null">
+	                TO_DATE(#{instAndAppInfo.keyVldEndYmd}, 'YYYYMMDD'),
+	            </if>
+	            CURRENT_TIMESTAMP
+	        );
+		</insert>	
+		
+		<insert id="saveLogWithRequestInfo">
+			MERGE INTO log l
+		    USING (
+		        SELECT #{logPk} AS ymd
+		    ) AS src
+		    ON l.ymd = src.ymd
+		    WHEN MATCHED THEN
+		        UPDATE SET
+		            req_method = #{requestInfo.reqMethod}, 
+		            req_url = #{requestInfo.reqUrl}, 
+		            query_string = #{requestInfo.queryString}, 
+		            req_ip = #{requestInfo.reqIp}, 
+		            req_header = #{requestInfo.reqHeader}, 
+		            json_req_body = #{requestInfo.jsonReqBody}
+		    WHEN NOT MATCHED THEN
+		        INSERT (
+		            ymd,
+		            req_method, 
+		            req_url, 
+		            query_string, 
+		            req_ip, 
+		            req_header, 
+		            json_req_body
+		        )
+		        VALUES (
+		            #{logPk},
+		            #{requestInfo.reqMethod}, 
+		            #{requestInfo.reqUrl}, 
+		            #{requestInfo.queryString}, 
+		            #{requestInfo.reqIp}, 
+		            #{requestInfo.reqHeader}, 
+		            #{requestInfo.jsonReqBody}
+		        );
+	</insert>
+	
+	<insert id="saveLogWithRes">
+		MERGE INTO log l
+	    USING (
+	        SELECT #{logPk} AS ymd
+	    ) AS src
+	    ON l.ymd = src.ymd
+	    WHEN MATCHED THEN
+	        UPDATE SET
+	            res_cd = #{resultCode},
+	            res_msg = #{resultMessage},
+	            json_res = #{jsonRes},
+	            updt_dt = CURRENT_TIMESTAMP
+	    WHEN NOT MATCHED THEN
+	        INSERT (
+	            ymd,
+	            res_cd,
+	            res_msg,
+	            json_res,
+	            updt_dt
+	        )
+	        VALUES (
+	            #{logPk},
+	            #{resultCode},
+	            #{resultMessage},
+	            #{jsonRes},
+	            CURRENT_TIMESTAMP
+	        );
+	</insert>
+	
+	<!--<insert id="saveLogWithReqVO" parameterType="map">
+    UPDATE log
+    <set>
+        <if test="reqVO.agencyToken != null">
+            inst_token = #{reqVO.agencyToken},
+        </if>
+        <if test="reqVO.applicationToken != null">
+            app_token = #{reqVO.applicationToken},
+        </if>
+        <if test="reqVO.userName != null">
+            emp_nm = #{reqVO.userName},
+        </if>
+        <if test="reqVO.birthDay != null">
+            emp_brdt = TO_DATE(#{reqVO.birthDay}, 'YYYYMMDD'),
+        </if>
+        <if test="reqVO.subCode != null">
+            emp_ssn_back = #{reqVO.subCode},
+        </if>
+        <if test="reqVO.mobileNo != null">
+            emp_telno = #{reqVO.mobileNo},
+        </if>
+        <if test="reqVO.telecom != null">
+            emp_telecom = #{reqVO.telecom},
+        </if>
+        <if test="reqVO.deviceInfo != null">
+            emp_device_info = #{reqVO.deviceInfo},
+        </if>
+        <if test="reqVO.ci != null">
+            emp_ci = #{reqVO.ci},
+        </if>
+        <if test="reqVO.issuedYmd != null">
+            issu_ymd = TO_DATE(#{reqVO.issuedYmd}, 'YYYYMMDD'),
+        </if>
+        <if test="reqVO.encKey != null">
+            enc_key = #{reqVO.encKey},
+        </if>
+        <if test="reqVO.qrCd != null">
+            qr_cd = #{reqVO.qrCd},
+        </if>
+        <if test="reqVO.appKey != null">
+            app_key = #{reqVO.appKey},
+        </if>
+        <if test="reqVO.stDt != null">
+            inq_bgng_ymd = TO_DATE(#{reqVO.stDt}, 'YYYYMMDD'),
+        </if>
+        <if test="reqVO.endDt != null">
+            inq_end_ymd = TO_DATE(#{reqVO.endDt}, 'YYYYMMDD'),
+        </if>
+        <if test="reqVO.curListIndex != null">
+            bgng_index = #{reqVO.curListIndex},
+        </if>
+        <if test="reqVO.reqListCnt != null">
+            req_list_cnt = #{reqVO.reqListCnt},
+        </if>
+        <if test="reqVO.status != null">
+            qr_use_ny = #{reqVO.status},
+        </if>
+        <if test="reqVO.order != null">
+            qr_sort = #{reqVO.order},
+        </if>
+        <if test="reqVO.range != null">
+            qr_range = #{reqVO.range},
+        </if>
+        updt_dt = CURRENT_TIMESTAMP
+	    </set>
+	    WHERE ymd = #{logPk}
+	</insert>-->
+	
+	<insert id="saveLogWithIdInfo">
+	    MERGE INTO log l
+	    USING (
+	        SELECT #{logPk} AS ymd
+	    ) AS src
+	    ON l.ymd = src.ymd
+	    WHEN MATCHED THEN
+	        UPDATE SET
+	            emp_id = #{idInfo.userId},
+	            emp_brdt = #{idInfo.birthDay},
+	            emp_ssn_back = #{idInfo.subCode},
+	            emp_nm = #{idInfo.userName},
+	            issu_ymd = #{idInfo.issuedYmd},
+	            emp_ci = #{idInfo.ci},
+	            emp_telno = #{idInfo.mobileNo},
+	            emp_addr = #{idInfo.address},
+	            emp_daddr = #{idInfo.detailAddress},
+	            emp_inst_nm = #{idInfo.issuedInstNm},
+	            photo_data = #{idInfo.photo},
+	            app_key = #{idInfo.appKey},
+	            emp_telecom = #{idInfo.telecom},
+	            emp_device_info = #{idInfo.deviceInfo},
+	            emp_stts = #{idInfo.status},
+	            emp_id_stts = #{idInfo.idStatus},
+	            updt_dt = CURRENT_TIMESTAMP
+	    WHEN NOT MATCHED THEN
+	        INSERT (
+	            ymd,
+	            emp_id,
+	            emp_brdt,
+	            emp_ssn_back,
+	            emp_nm,
+	            issu_ymd,
+	            emp_ci,
+	            emp_telno,
+	            emp_addr,
+	            emp_daddr,
+	            emp_inst_nm,
+	            photo_data,
+	            app_key,
+	            emp_telecom,
+	            emp_device_info,
+	            emp_stts,
+	            emp_id_stts,
+	            updt_dt
+	        )
+	        VALUES (
+	            #{logPk},
+	            #{idInfo.userId},
+	            #{idInfo.birthDay},
+	            #{idInfo.subCode},
+	            #{idInfo.userName},
+	            #{idInfo.issuedYmd},
+	            #{idInfo.ci},
+	            #{idInfo.mobileNo},
+	            #{idInfo.address},
+	            #{idInfo.detailAddress},
+	            #{idInfo.issuedInstNm},
+	            #{idInfo.photo},
+	            #{idInfo.appKey},
+	            #{idInfo.telecom},
+	            #{idInfo.deviceInfo},
+	            #{idInfo.status},
+	            #{idInfo.idStatus},
+	            CURRENT_TIMESTAMP
+	        );
+	</insert>	
+	
+	<insert id="saveLogWithQRCode">
+		MERGE INTO log l
+	    USING (
+	        SELECT #{logPk} AS ymd
+	    ) AS src
+	    ON l.ymd = src.ymd
+	    WHEN MATCHED THEN
+	        UPDATE SET
+	            qr_cd = #{qrCode}
+	    WHEN NOT MATCHED THEN
+	        INSERT (
+	            ymd,
+	            qr_cd
+	        )
+	        VALUES (
+	            #{logPk},
+	            #{qrCode}
+	        );
+	</insert>	
+
+	
+</mapper>

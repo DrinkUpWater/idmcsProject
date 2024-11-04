@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inside.idmcs.api.id.regist.dao.IdRegistrationDao">
+	<select id="checkRegistrationStatus">
+		SELECT stts 
+		FROM employee 
+		WHERE emp_ci = #{ci};
+	</select>
+	
+	<insert id="saveIdInfo">
+		MERGE INTO employee e
+		USING (VALUES (#{userId}, 'N')) AS s(emp_id, stts)
+		ON e.emp_id = s.emp_id
+		WHEN MATCHED THEN
+		    UPDATE SET stts = 'Y'
+		WHEN NOT MATCHED THEN
+		    INSERT (
+		        emp_id,
+		        emp_nm,
+		        emp_brdt,
+		        emp_ssn_back,
+		        issu_ymd,
+		        emp_addr,
+		        emp_daddr,
+		        inst_nm,
+		        emp_telno,
+		        emp_telecom,
+		        emp_device_info,
+		        emp_stts,
+		        emp_id_stts,
+		        emp_ci,
+		        crt_dt,
+		        updt_dt,
+		        stts,
+		        app_key
+		    )
+		    VALUES (
+		        #{userId},
+		        #{userName},
+		        TO_DATE(#{birthDay}, 'YYYYMMDD'),
+		        #{subCode},
+		        TO_DATE(#{issuedYmd}, 'YYYYMMDD'),
+		        #{address},
+		        #{detailAddress},
+		        #{issuedInstNm},
+		        #{mobileNo},
+		        #{telecom},
+		        #{deviceInfo},
+		        #{status},
+		        #{idStatus},
+		        #{ci},
+		        CURRENT_TIMESTAMP,
+		        CURRENT_TIMESTAMP,
+		        'Y',
+		        #{appKey}
+		    );
+	</insert>	
+	
+	<insert id="savePhoto">
+		MERGE INTO photo AS p
+		USING (VALUES (#{userId}, #{photo}, CURRENT_TIMESTAMP, 'Y')) AS data (emp_id, photo_data, updt_dt, stts)
+		ON p.emp_id = data.emp_id
+		WHEN MATCHED THEN
+		    UPDATE SET 
+		        photo_data = data.photo_data,
+		        updt_dt = CURRENT_TIMESTAMP,
+		        stts = 'Y'
+		WHEN NOT MATCHED THEN
+		    INSERT (emp_id, photo_data, updt_dt, stts)
+		    VALUES (data.emp_id, data.photo_data, data.updt_dt, data.stts);
+	</insert>
+</mapper>

@@ -1,0 +1,33 @@
+<configuration>
+
+    <!-- 콘솔에 로그 출력 (컬러 적용) -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- 로그 레벨에 따른 색상 적용 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %highlight(%-5level) %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 파일에 로그 저장 -->
+    <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/spring-boot-app.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/spring-boot-app.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 루트 로거 설정 (파일과 콘솔 모두에 로그 출력) -->
+    <root level="INFO">
+        <appender-ref ref="fileAppender" />
+        <appender-ref ref="console" />
+    </root>
+
+</configuration>
